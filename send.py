@@ -3,19 +3,23 @@ import smtplib
 import time
 import datetime
 
-date = 'Dec/8/2017'
-print(date)
+sendaddress = input("YOUR email address:")
+receiveaddress = input("RECIPIENT's email address:")
+
+DATE = str(datetime.datetime.today())
+DATEtoday = str(datetime.date.today())
+print(DATE)
 
 msg = MIMEText(
    "<h1>A Heading</h1><p>Hello There!</p>","html")
 
-msg['Subject'] = 'Announcements for', date
-msg['From']='SenderAddress'
-msg['To'] = 'RecipientAddress'
+msg['Subject'] = 'Church Announcements for', DATEtoday
+msg['From']= sendaddress
+msg['To'] = receiveaddress
 
 s = smtplib.SMTP('localhost')
-s.sendmail('SenderAddress',
-           ['RecipientAddress'],
+s.sendmail(sendaddress,
+           [receiveaddress],
            msg.as_string())
 
-print("Message Sent on", date)
+print("Message Sent on", DATE)
