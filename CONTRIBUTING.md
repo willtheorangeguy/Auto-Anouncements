@@ -3,6 +3,7 @@
 Thank you for your interest in contributing to Auto Announcements! Before you contribute please read the following guidelines that will help to make to contribution process a success! Please remember that all contributions must follow the Code of Conduct.
 
 **All code is written in Python 3.5-3.6.**
+**All code is Copyright (C) 2016 - 2018 Dog Face Development Company**
 
 Pull Request and Issue Templates can be found here:
 

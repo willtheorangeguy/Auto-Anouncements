@@ -1,3 +1,5 @@
+# Copyright (C) 2017 - 2018 William Vandergraaf
+
 from email.mime.text import *
 import smtplib
 import time
