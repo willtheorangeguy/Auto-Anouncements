@@ -5,8 +5,8 @@ import smtplib
 import time
 import datetime
 
-sendaddress = input("YOUR email address:")
-receiveaddress = input("RECIPIENT's email address:")
+sendaddress = input("YOUR email address:") #remove the input statement and replace with your email address for direct delivery
+receiveaddress = input("RECIPIENT's email address:") #remove the input statement and replace with the reciptents email address for direct delivery
 
 DATE = str(datetime.datetime.today())
 DATEtoday = str(datetime.date.today())
@@ -24,4 +24,4 @@ s.sendmail(sendaddress,
            [receiveaddress],
            msg.as_string())
 
-print("Message Sent on", DATE)
+print("Message sent successfully on", DATE, "!")
