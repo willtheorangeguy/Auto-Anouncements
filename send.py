@@ -1,4 +1,4 @@
-# Copyright (C) 2017 - 2019 Dog Face Development Co.
+# Copyright (C) 2017 - 2020 Dog Face Development Co.
 
 from email.mime.text import *
 import smtplib
