@@ -11,8 +11,7 @@ This folder includes all of the docs for Auto Announcements. More can be found o
 |   |   ├── EULA.md
 |   |   ├── PRIVACY.md
 |   |   ├── TERMS.md
-|   ├── ...
-|   ├── ...
-|   ├── ...
+|   ├── CUSTOMIZATION.md
+|   ├── USAGE.md
 └── README.md
 ```
