@@ -59,7 +59,7 @@
 
 You can **[download](https://github.com/Dog-Face-Development/Auto-Anouncements/releases/latest) the source code** to run the scripts from the command line on Windows, macOS and Linux. **This will require [Python](https://www.python.org/downloads/).**
 
-You can **[download](https://github.com/Dog-Face-Development/Auto-Anouncements/releases/latest) the latest executable version** of %PROGRAM NAME% for Windows. **This does not require Python.**
+You can **[download](https://github.com/Dog-Face-Development/Auto-Anouncements/releases/latest) the latest executable version** of Auto Announcements for Windows. **This does not require Python.**
 
 ## How To Use
 
