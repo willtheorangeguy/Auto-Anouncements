@@ -72,7 +72,7 @@ $ git clone https://github.com/Dog-Face-Development/Auto-Anouncements.git
 # Go into the repository
 $ cd Auto-Announcements
 
-# Run %PROGRAM NAME%
+# Run Auto Announcements
 $ python main.py
 ```
 
