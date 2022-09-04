@@ -1,6 +1,6 @@
 # Dog Face Development Co. Privacy Policy
 
-Last updated: September 2, 2022.
+Last updated: September 3, 2022.
 
 This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.
 
@@ -37,10 +37,6 @@ For the purposes of this Privacy Policy:
 ### Personal Data
 
 While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:
-
-- ...
-
-### ...
 
 ## Use of Your Personal Data
 
