@@ -1,4 +1,4 @@
-# Contributing to %PROGRAM NAME%
+# Contributing to Auto Announcements
 
 🎉 Thanks for taking the time to contribute! 🎉
 
