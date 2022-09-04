@@ -5,7 +5,7 @@
 - [ ] Finalize program.
 - [ ] Have emails and attachments actually send.
 
-# Version 1.1.0
+## Version 1.1.0
 
 - [ ] [#27](https://github.com/Dog-Face-Development/Auto-Anouncements/issues/27): Create a PyPI Package.
 
