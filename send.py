@@ -1,5 +1,5 @@
 """
-Auto Anouncements - A bot framework that automatically sends announcements. 
+Auto Announcements - A bot framework that automatically sends announcements. 
 Copyright (C) 2017-2022 Dog Face Development Co.
 
 This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@ import datetime
 sendaddress = input('YOUR email address:')
 # replace above with your email address for direct delivery
 receiveaddress = input('RECIPIENT\'s email address:')
-# replace above with the reciptents email address for direct delivery
+# replace above with the recipients email address for direct delivery
 
 DATE = str(datetime.datetime.today())
 DATEtoday = str(datetime.date.today())
