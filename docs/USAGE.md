@@ -22,12 +22,12 @@ To install Auto Announcements, you can use an executable package (Windows), run 
 
 1. Download and install [Python](https://www.python.org/downloads/).
 2. Open a terminal and run the command: `pip install auto-announcements`.
-3. Start the program by running the command: `auto-annoucements`. 
-5. Enjoy the program!
+3. Start the program by running the command: `auto-announcements`.
+4. Enjoy the program!
 
 ## Docker Container
 
 1. Download and install [Docker](https://www.docker.com/products/docker-desktop/).
-2. Open a terminal and pull the container: `docker pull ghcr.io/dog-face-development/auto-anouncements:master`.
-3. Start the container: `docker run -i -t ghcr.io/dog-face-development/auto-anouncements:master python main.py`.
+2. Open a terminal and pull the container: `docker pull ghcr.io/dog-face-development/auto-announcements:master`.
+3. Start the container: `docker run -i -t ghcr.io/dog-face-development/auto-announcements:master python main.py`.
 4. Enjoy the program!

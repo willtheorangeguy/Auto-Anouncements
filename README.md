@@ -74,7 +74,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com/downloa
 $ git clone https://github.com/Dog-Face-Development/Auto-Anouncements
 
 # Go into the repository
-$ cd Auto-Annoucenments
+$ cd Auto-Announcements
 
 # Run the CLI
 $ python send.py
@@ -98,10 +98,10 @@ You can pull the [Docker](https://www.docker.com/) image from GitHub Packages. F
 
 ```bash
 # Pull image
-$ docker pull ghcr.io/dog-face-development/auto-anouncements:master
+$ docker pull ghcr.io/dog-face-development/auto-announcements:master
 
 # Run container
-$ docker run -i -t ghcr.io/dog-face-development/auto-anouncements:master python send.py
+$ docker run -i -t ghcr.io/dog-face-development/auto-announcements:master python send.py
 ```
 
 ## Support
