@@ -12,9 +12,9 @@
 <!-- Badges -->
 <div align="center">
   <!-- Stability -->
-  <img alt="GitHub Test State" src="https://github.com/Dog-Face-Development/Auto-Anouncements/actions/workflows/test.yml/badge.svg">
+  <img alt="Docker Build State" src="https://github.com/Dog-Face-Development/Auto-Anouncements/actions/workflows/docker-publish.yml/badge.svg">
   <!-- Stability -->
-  <img alt="GitHub Build State" src="https://github.com/Dog-Face-Development/Auto-Anouncements/actions/workflows/build.yml/badge.svg">
+  <img alt="PyPI Build State" src="https://github.com/Dog-Face-Development/Auto-Anouncements/actions/workflows/push-to-pypi.yml/badge.svg">
   <!-- Stability -->
   <img alt="Pylint State" src="https://github.com/Dog-Face-Development/Auto-Anouncements/actions/workflows/pylint.yml/badge.svg">
   <!-- CodeQL -->
