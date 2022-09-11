@@ -63,17 +63,45 @@ You can **[download](https://github.com/Dog-Face-Development/Auto-Anouncements/r
 
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com/downloads) and [Python](https://www.python.org/downloads/) installed on your computer. If you would rather not use Git, you can just download the scripts from GitHub above. From your command line:
+To run the application, you can use [Git and the Python Interpreter](https://github.com/Dog-Face-Development/Auto-Anouncements/main/README.md#git), which allows you to clone and run the application, [`pip`](https://github.com/Dog-Face-Development/Auto-Anouncements/main/README.md#pip) to create a command line application, or [Docker](https://github.com/Dog-Face-Development/Auto-Anouncements/main/README.md#docker) to create a container of the application.
+
+### Git
+
+To clone and run this application, you'll need [Git](https://git-scm.com/downloads) and [Python](https://www.python.org/downloads/) installed on your computer. If you would rather not use Git, you can just download the script from GitHub above. From your command line:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/Dog-Face-Development/Auto-Anouncements.git
+$ git clone https://github.com/Dog-Face-Development/Auto-Anouncements
 
 # Go into the repository
-$ cd Auto-Announcements
+$ cd Auto-Annoucenments
 
-# Run Auto Announcements
-$ python main.py
+# Run the CLI
+$ python send.py
+```
+
+### `pip`
+
+You can install the program from the [Python Package Index](https://pypi.org/project/Auto-Annoucements/) through `pip`.
+
+```bash
+# Install via pip
+$ pip install auto-announcements
+
+# Run the CLI
+$ auto-announcements
+```
+
+### Docker
+
+You can pull the [Docker](https://www.docker.com/) image from GitHub Packages. From your command line:
+
+```bash
+# Pull image
+$ docker pull ghcr.io/dog-face-development/auto-anouncements:master
+
+# Run container
+$ docker run -i -t ghcr.io/dog-face-development/auto-anouncements:master python send.py
 ```
 
 ## Support
