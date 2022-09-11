@@ -7,4 +7,4 @@ services:
       - ./data:/home/app_user/data
     stdin_open: true
     tty: true
-    command: bash -c "python main.py"
+    command: bash -c "python send.py"
