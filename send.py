@@ -1,6 +1,6 @@
 """
 Auto Announcements - A bot framework that automatically sends announcements. 
-Copyright (C) 2017-2022 Dog Face Development Co.
+Copyright (C) 2017-2023 Dog Face Development Co.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -40,12 +40,8 @@ def main():
     s = smtplib.SMTP("localhost")
     s.sendmail(sendaddress, [receiveaddress], msg.as_string())
 
-<<<<<<< Updated upstream
-    print("Message sent successfully on", DATE, "!")
-=======
     print('Message sent successfully on', DATE, '!')
 
 if __name__ == "__main__":
     main()
     
->>>>>>> Stashed changes
