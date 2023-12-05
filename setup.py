@@ -1,15 +1,19 @@
+"""Setup file for the Auto-Announcements package."""
+
 from setuptools import setup
 
 
 def readme():
-    with open("README.md") as f:
+    """Return the contents of the README.md file as a string."""
+    with open("README.md", encoding="UTF-8") as f:
         return f.read()
 
 
 setup(
     name="auto-announcements",
     version="0.2.0",
-    description="A bot framework that automatically sends announcements (or any other file) to a specified email address on Saturday night or when the script is run.",
+    description="A bot framework that automatically sends announcements (or any other file) \
+        to a specified email address on Saturday night or when the script is run.",
     long_description=readme(),
     classifiers=[
         "Development Status :: 3 - Alpha",

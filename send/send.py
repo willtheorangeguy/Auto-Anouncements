@@ -14,34 +14,35 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+#pylint: disable=global-variable-undefined
 
-from email.mime.text import *
+from email.mime.text import MIMEText
 import smtplib
-import time
 import datetime
 
 
 def main():
+    """Main function for sending emails."""
     global msg
     sendaddress = input("YOUR email address:")
     # replace above with your email address for direct delivery
     receiveaddress = input("RECIPIENT's email address:")
     # replace above with the recipients email address for direct delivery
 
-    DATE = str(datetime.datetime.today())
-    DATEtoday = str(datetime.date.today())
-    print(DATE)
+    date = str(datetime.datetime.today())
+    date_today = str(datetime.date.today())
+    print(date)
 
     msg = MIMEText("<h1>A Heading</h1><p>Hello There!</p>", "html")
 
-    msg["Subject"] = "Church Announcements for", DATEtoday
+    msg["Subject"] = "Church Announcements for", date_today
     msg["From"] = sendaddress
     msg["To"] = receiveaddress
 
     s = smtplib.SMTP("localhost")
     s.sendmail(sendaddress, [receiveaddress], msg.as_string())
 
-    print("Message sent successfully on", DATE, "!")
+    print("Message sent successfully on", date, "!")
 
 
 if __name__ == "__main__":
