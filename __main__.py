@@ -1,5 +1,5 @@
 """Main entry point for the application."""
-#pylint: disable=invalid-name
+#pylint: disable=invalid-name, import-error
 
 from send import main
 
