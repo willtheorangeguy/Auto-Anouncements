@@ -1,5 +1,5 @@
 """
-Auto Announcements - A bot framework that automatically sends announcements. 
+Auto Announcements - A bot framework that automatically sends announcements.
 Copyright (C) 2017-2024 Dog Face Development Co.
 
 This program is free software: you can redistribute it and/or modify
@@ -14,7 +14,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-#pylint: disable=global-variable-undefined
+
+# pylint: disable=global-variable-undefined
 
 from email.mime.text import MIMEText
 import smtplib
@@ -35,7 +36,7 @@ def main():
 
     msg = MIMEText("<h1>A Heading</h1><p>Hello There!</p>", "html")
 
-    msg["Subject"] = "Church Announcements for", date_today
+    msg["Subject"] = "Church Announcements for " + date_today
     msg["From"] = sendaddress
     msg["To"] = receiveaddress
 
