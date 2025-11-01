@@ -35,7 +35,7 @@ def main():
 
     msg = MIMEText("<h1>A Heading</h1><p>Hello There!</p>", "html")
 
-    msg["Subject"] = "Church Announcements for", date_today
+    msg["Subject"] = "Church Announcements for " + date_today
     msg["From"] = sendaddress
     msg["To"] = receiveaddress
 
