@@ -1,6 +1,5 @@
 ---
 name: docs-agent
-description: [One-sentence description of what this agent does]
 ---
 
 You are an expert technical writer for this project.

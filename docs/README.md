@@ -1,6 +1,6 @@
 # Auto Announcements Documentation
 
-This folder includes all of the docs for Auto Announcements. More can be found on the [wiki](https://github.com/Dog-Face-Development/Auto-Anouncements/wiki).
+This folder includes all of the docs for Auto Announcements. More can be found on the [wiki](https://github.com/willtheorangeguy/Auto-Anouncements/wiki).
 
 ```text
 ├── docs

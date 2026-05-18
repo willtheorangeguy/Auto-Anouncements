@@ -17,13 +17,13 @@ setup(
     long_description=readme(),
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
         "Operating System :: OS Independent",
         "Topic :: Communications :: Email",
     ],
     keywords="auto announcement email bot cli",
-    url="https://github.com/Dog-Face-Development/Auto-Anouncements",
+    url="https://github.com/willtheorangeguy/Auto-Anouncements",
     author="willtheorangeguy",
     entry_points={"console_scripts": ["auto-announcements=send:main"]},
 )

@@ -1,6 +1,6 @@
 ---
 name: lint-agent
-description: [One-sentence description of what this agent does]
+
 ---
 
 You are an expert linting bot for this project.

@@ -1,6 +1,6 @@
 <!-- Logo -->
 <h1 align="center">
-  <img src="https://github.com/Dog-Face-Development/Auto-Anouncements/blob/master/docs/images/logo.png" height="250px" width="400px" alt="Auto Announcements">
+  <img src="https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/images/logo.png" height="250px" width="400px" alt="Auto Announcements">
   <br>
   Auto Announcements
   <br>
@@ -12,27 +12,27 @@
 <!-- Badges -->
 <div align="center">
   <!-- Stability -->
-  <img alt="Docker Build State" src="https://github.com/Dog-Face-Development/Auto-Anouncements/actions/workflows/docker-publish.yml/badge.svg">
+  <img alt="Docker Build State" src="https://github.com/willtheorangeguy/Auto-Anouncements/actions/workflows/docker-publish.yml/badge.svg">
   <!-- Stability -->
-  <img alt="PyPI Build State" src="https://github.com/Dog-Face-Development/Auto-Anouncements/actions/workflows/push-to-pypi.yml/badge.svg">
+  <img alt="PyPI Build State" src="https://github.com/willtheorangeguy/Auto-Anouncements/actions/workflows/push-to-pypi.yml/badge.svg">
   <!-- Stability -->
-  <img alt="Pytest State" src="https://github.com/Dog-Face-Development/Auto-Anouncements/actions/workflows/test.yml/badge.svg">
+  <img alt="Pytest State" src="https://github.com/willtheorangeguy/Auto-Anouncements/actions/workflows/test.yml/badge.svg">
   <!-- Stability -->
-  <img alt="Pylint State" src="https://github.com/Dog-Face-Development/Auto-Anouncements/actions/workflows/pylint.yml/badge.svg">
+  <img alt="Pylint State" src="https://github.com/willtheorangeguy/Auto-Anouncements/actions/workflows/pylint.yml/badge.svg">
   <!-- CodeQL -->
-  <img alt="CodeQL State" src="https://github.com/Dog-Face-Development/Auto-Anouncements/actions/workflows/codeql-analysis.yml/badge.svg">
+  <img alt="CodeQL State" src="https://github.com/willtheorangeguy/Auto-Anouncements/actions/workflows/codeql-analysis.yml/badge.svg">
   <!-- Version -->
-  <img alt="GitHub Version" src="https://img.shields.io/github/v/release/Dog-Face-Development/Auto-Anouncements?include_prereleases">
+  <img alt="GitHub Version" src="https://img.shields.io/github/v/release/willtheorangeguy/Auto-Anouncements?include_prereleases">
   <!-- Issues -->
-  <img alt="GitHub Issues" src="https://img.shields.io/github/issues/Dog-Face-Development/Auto-Anouncements">
+  <img alt="GitHub Issues" src="https://img.shields.io/github/issues/willtheorangeguy/Auto-Anouncements">
   <!-- Pull Requests -->
-  <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/Dog-Face-Development/Auto-Anouncements">
+  <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/willtheorangeguy/Auto-Anouncements">
   <!-- Discord -->
   <img alt="Discord Server ID" src="https://img.shields.io/discord/1015479997353439312">
   <!-- Downloads -->
-  <img alt="Downloads" src="https://img.shields.io/github/downloads/Dog-Face-Development/Auto-Anouncements/total">
+  <img alt="Downloads" src="https://img.shields.io/github/downloads/willtheorangeguy/Auto-Anouncements/total">
   <!-- Language Count -->
-  <img alt="GitHub Languages" src="https://img.shields.io/github/languages/count/Dog-Face-Development/Auto-Anouncements">
+  <img alt="GitHub Languages" src="https://img.shields.io/github/languages/count/willtheorangeguy/Auto-Anouncements">
 </div>
 
 <!-- Navigation -->
@@ -47,7 +47,7 @@
 </p>
 
 <!-- Screenshot(s) -->
-![screenshot](https://github.com/Dog-Face-Development/Auto-Anouncements/blob/master/docs/images/welcome.png)
+![screenshot](https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/images/welcome.png)
 
 ## Key Features
 
@@ -59,13 +59,13 @@
 
 ## Download
 
-You can **[download](https://github.com/Dog-Face-Development/Auto-Anouncements/releases/latest) the source code** to run the scripts from the command line on Windows, macOS and Linux. **This will require [Python](https://www.python.org/downloads/).**
+You can **[download](https://github.com/willtheorangeguy/Auto-Anouncements/releases/latest) the source code** to run the scripts from the command line on Windows, macOS and Linux. **This will require [Python](https://www.python.org/downloads/).**
 
-You can **[download](https://github.com/Dog-Face-Development/Auto-Anouncements/releases/latest) the latest executable version** of Auto Announcements for Windows. **This does not require Python.**
+You can **[download](https://github.com/willtheorangeguy/Auto-Anouncements/releases/latest) the latest executable version** of Auto Announcements for Windows. **This does not require Python.**
 
 ## How To Use
 
-To run the application, you can use [Git and the Python Interpreter](https://github.com/Dog-Face-Development/Auto-Anouncements/main/README.md#git), which allows you to clone and run the application, [`pip`](https://github.com/Dog-Face-Development/Auto-Anouncements/main/README.md#pip) to create a command line application, or [Docker](https://github.com/Dog-Face-Development/Auto-Anouncements/main/README.md#docker) to create a container of the application.
+To run the application, you can use [Git and the Python Interpreter](https://github.com/willtheorangeguy/Auto-Anouncements/main/README.md#git), which allows you to clone and run the application, [`pip`](https://github.com/willtheorangeguy/Auto-Anouncements/main/README.md#pip) to create a command line application, or [Docker](https://github.com/willtheorangeguy/Auto-Anouncements/main/README.md#docker) to create a container of the application.
 
 ### Git
 
@@ -73,7 +73,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com/downloa
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/Dog-Face-Development/Auto-Anouncements
+$ git clone https://github.com/willtheorangeguy/Auto-Anouncements
 
 # Go into the repository
 $ cd Auto-Announcements
@@ -100,21 +100,21 @@ You can pull the [Docker](https://www.docker.com/) image from GitHub Packages. F
 
 ```bash
 # Pull image
-$ docker pull ghcr.io/dog-face-development/auto-announcements:master
+$ docker pull ghcr.io/willtheorangeguy/auto-announcements:master
 
 # Run container
-$ docker run -i -t ghcr.io/dog-face-development/auto-announcements:master python send.py
+$ docker run -i -t ghcr.io/willtheorangeguy/auto-announcements:master python send.py
 ```
 
 ## Support
 
-Customization for Auto Announcements can be found in the [`CUSTOMIZATION`](https://github.com/Dog-Face-Development/Auto-Anouncements/blob/master/docs/CUSTOMIZATION.md) doc. More documentation is available in the **[Documentation](https://github.com/Dog-Face-Development/Auto-Anouncements/tree/master/docs)** and on the **[Wiki](https://github.com/Dog-Face-Development/Auto-Anouncements/wiki)**. If more support is required, please open a **[GitHub Discussion](https://github.com/Dog-Face-Development/Auto-Anouncements/discussions)** or join our **[Discord](https://discord.gg/XVBj6WGjap)**.
+Customization for Auto Announcements can be found in the [`CUSTOMIZATION`](https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/CUSTOMIZATION.md) doc. More documentation is available in the **[Documentation](https://github.com/willtheorangeguy/Auto-Anouncements/tree/master/docs)** and on the **[Wiki](https://github.com/willtheorangeguy/Auto-Anouncements/wiki)**. If more support is required, please open a **[GitHub Discussion](https://github.com/willtheorangeguy/Auto-Anouncements/discussions)** or join our **[Discord](https://discord.gg/XVBj6WGjap)**.
 
 ## Contributing
 
-Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and [open a pull request](https://github.com/Dog-Face-Development/Auto-Anouncements/compare).
+Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and [open a pull request](https://github.com/willtheorangeguy/Auto-Anouncements/compare).
 
-Please read [`CONTRIBUTING`](CONTRIBUTING.md) for details on our [`CODE OF CONDUCT`](CODE_OF_CONDUCT.md), and the process for submitting pull requests to us (including how to sign our CLA).
+Please read [`CONTRIBUTING`](CONTRIBUTING.md) for details on our [`CODE OF CONDUCT`](CODE_OF_CONDUCT.md), and the process for submitting pull requests to us.
 
 ## Changelog
 
@@ -152,10 +152,10 @@ This software uses the following open source packages, projects, services or web
 
 ## You may also like...
 
-* [ProgramVer](https://github.com/Dog-Face-Development/ProgramVer) - An open-source, Python GUI version window to show copyright info and licenses.
-* [PyWorkout](https://github.com/Dog-Face-Development/PyWorkout) - A minimal CLI to keep you inspired during your workout!
-* [PyAvatar](https://github.com/Dog-Face-Development/PyAvatar) - Easily display all of your creative avatars to keep them consistent across websites.
+* [ProgramVer](https://github.com/willtheorangeguy/ProgramVer) - An open-source, Python GUI version window to show copyright info and licenses.
+* [PyWorkout](https://github.com/willtheorangeguy/PyWorkout) - A minimal CLI to keep you inspired during your workout!
+* [PyAvatar](https://github.com/willtheorangeguy/PyAvatar) - Easily display all of your creative avatars to keep them consistent across websites.
 
 ## License
 
-This project is licensed under the [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.en.html) - see the [`LICENSE`](LICENSE.md) file for details. See the [Privacy Policy](https://github.com/Dog-Face-Development/Auto-Anouncements/blob/master/docs/legal/PRIVACY.md), [Terms and Conditions](https://github.com/Dog-Face-Development/Auto-Anouncements/blob/master/docs/legal/TERMS.md), and [EULA](https://github.com/Dog-Face-Development/Auto-Anouncements/blob/master/docs/legal/EULA.md) for legal information.
+This project is licensed under the [MIT License](https://mit-license.org/) - see the [`LICENSE`](LICENSE.md) file for details. See the [Privacy Policy](https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/legal/PRIVACY.md), [Terms and Conditions](https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/legal/TERMS.md), and [EULA](https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/legal/EULA.md) for legal information.

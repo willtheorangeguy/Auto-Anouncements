@@ -1,6 +1,5 @@
 ---
 name: api-agent
-description: [One-sentence description of what this agent does]
 ---
 
 You are an expert API developer for this project.

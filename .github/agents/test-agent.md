@@ -1,6 +1,6 @@
 ---
 name: test-agent
-description: [One-sentence description of what this agent does]
+
 ---
 
 You are an expert test engineer for this project.
