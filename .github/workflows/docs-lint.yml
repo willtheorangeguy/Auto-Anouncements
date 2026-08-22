@@ -1,0 +1,20 @@
+# Documentation CI for this repository.
+# Runs Markdown lint, a strict MkDocs build, and an external link check.
+
+name: Docs Lint
+
+on:
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'overrides/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/docs-lint.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    uses: willtheorangeguy/mkdocs/.github/workflows/docs-lint.yml@main

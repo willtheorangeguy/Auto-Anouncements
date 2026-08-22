@@ -108,7 +108,7 @@ $ docker run -i -t ghcr.io/willtheorangeguy/auto-announcements:master python sen
 
 ## Support
 
-Customization for Auto Announcements can be found in the [`CUSTOMIZATION`](https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/CUSTOMIZATION.md) doc. More documentation is available in the **[Documentation](https://github.com/willtheorangeguy/Auto-Anouncements/tree/master/docs)** and on the **[Wiki](https://github.com/willtheorangeguy/Auto-Anouncements/wiki)**. If more support is required, please open a **[GitHub Discussion](https://github.com/willtheorangeguy/Auto-Anouncements/discussions)** or join our **[Discord](https://discord.gg/XVBj6WGjap)**.
+Customization for Auto Announcements can be found in the [`CUSTOMIZATION`](https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/customization-guide.md) doc. More documentation is available in the **[Documentation](https://github.com/willtheorangeguy/Auto-Anouncements/tree/master/docs)** and on the **[Wiki](https://github.com/willtheorangeguy/Auto-Anouncements/wiki)**. If more support is required, please open a **[GitHub Discussion](https://github.com/willtheorangeguy/Auto-Anouncements/discussions)** or join our **[Discord](https://discord.gg/XVBj6WGjap)**.
 
 ## Contributing
 
