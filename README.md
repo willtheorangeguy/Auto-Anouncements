@@ -1,124 +1,89 @@
 <!-- Logo -->
 <h1 align="center">
-  <img src="https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/images/logo.png" height="250px" width="400px" alt="Auto Announcements">
+  <img src="https://raw.githubusercontent.com/willtheorangeguy/.github/main/icons/Auto-Anouncements/logo.png" height="250px" width="400px" alt="Auto Announcements">
   <br>
   Auto Announcements
   <br>
 </h1>
 
 <!-- Copy -->
-<h4 align="center">A bot framework that automatically sends announcements (or any other file) to a specified email address.</h4>
+<h4 align="center">A small script that sends an HTML announcement email through a local SMTP relay.</h4>
 
 <!-- Badges -->
 <div align="center">
-  <!-- Stability -->
-  <img alt="Docker Build State" src="https://github.com/willtheorangeguy/Auto-Anouncements/actions/workflows/docker-publish.yml/badge.svg">
-  <!-- Stability -->
-  <img alt="PyPI Build State" src="https://github.com/willtheorangeguy/Auto-Anouncements/actions/workflows/push-to-pypi.yml/badge.svg">
-  <!-- Stability -->
-  <img alt="Pytest State" src="https://github.com/willtheorangeguy/Auto-Anouncements/actions/workflows/test.yml/badge.svg">
-  <!-- Stability -->
-  <img alt="Pylint State" src="https://github.com/willtheorangeguy/Auto-Anouncements/actions/workflows/pylint.yml/badge.svg">
-  <!-- CodeQL -->
-  <img alt="CodeQL State" src="https://github.com/willtheorangeguy/Auto-Anouncements/actions/workflows/codeql-analysis.yml/badge.svg">
-  <!-- Version -->
   <img alt="GitHub Version" src="https://img.shields.io/github/v/release/willtheorangeguy/Auto-Anouncements?include_prereleases">
-  <!-- Issues -->
   <img alt="GitHub Issues" src="https://img.shields.io/github/issues/willtheorangeguy/Auto-Anouncements">
-  <!-- Pull Requests -->
   <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/willtheorangeguy/Auto-Anouncements">
-  <!-- Discord -->
-  <img alt="Discord Server ID" src="https://img.shields.io/discord/1015479997353439312">
-  <!-- Downloads -->
-  <img alt="Downloads" src="https://img.shields.io/github/downloads/willtheorangeguy/Auto-Anouncements/total">
-  <!-- Language Count -->
-  <img alt="GitHub Languages" src="https://img.shields.io/github/languages/count/willtheorangeguy/Auto-Anouncements">
+  <img alt="License" src="https://img.shields.io/github/license/willtheorangeguy/Auto-Anouncements">
 </div>
 
 <!-- Navigation -->
 <p align="center">
+  <a href="#status">Status</a> •
   <a href="#key-features">Key Features</a> •
-  <a href="#download">Download</a> •
-  <a href="#how-to-use">How To Use</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#documentation">Documentation</a> •
   <a href="#support">Support</a> •
   <a href="#contributing">Contributing</a> •
-  <a href="#changelog">Changelog</a> •
-  <a href="#credits">Credits & Contributors</a>
+  <a href="#credits">Credits</a> •
+  <a href="#license">License</a>
 </p>
 
-<!-- Screenshot(s) -->
-![screenshot](https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/images/welcome.png)
+<!-- Screenshot -->
+<div align="center">
+  <img alt="Auto Announcements" src="https://raw.githubusercontent.com/willtheorangeguy/.github/main/icons/Auto-Anouncements/welcome.png">
+</div>
+
+## Status
+
+**Early, and smaller than it looks.** The whole program is 38 lines: it prompts for two email addresses, builds a fixed one-line HTML message, and hands it to an SMTP server on `localhost`.
+
+There is **no scheduler, no file attachment, and no message-template loading** — earlier versions of this README described all three. `message.html` sits in the repository and nothing reads it. See [`docs/roadmap.md`](docs/roadmap.md) for what is intended, and [`docs/internal/known-issues.md`](docs/internal/known-issues.md) for what was documented but never built.
 
 ## Key Features
 
-* Automatically send file on a schedule or on dispatch.
-* Prompt for send and receive email addresses.
-* Email addresses can be hard coded.
-* Customizable HTML email body.
-* Cross Platform.
+- Prompts for the sender and recipient addresses at run time.
+- Sends a `text/html` message with the date in the subject line.
+- Runs anywhere Python does, with no dependencies.
 
-## Download
+It requires an SMTP server listening on `localhost` — see [Installation](#installation).
 
-You can **[download](https://github.com/willtheorangeguy/Auto-Anouncements/releases/latest) the source code** to run the scripts from the command line on Windows, macOS and Linux. **This will require [Python](https://www.python.org/downloads/).**
-
-You can **[download](https://github.com/willtheorangeguy/Auto-Anouncements/releases/latest) the latest executable version** of Auto Announcements for Windows. **This does not require Python.**
-
-## How To Use
-
-To run the application, you can use [Git and the Python Interpreter](https://github.com/willtheorangeguy/Auto-Anouncements/main/README.md#git), which allows you to clone and run the application, [`pip`](https://github.com/willtheorangeguy/Auto-Anouncements/main/README.md#pip) to create a command line application, or [Docker](https://github.com/willtheorangeguy/Auto-Anouncements/main/README.md#docker) to create a container of the application.
-
-### Git
-
-To clone and run this application, you'll need [Git](https://git-scm.com/downloads) and [Python](https://www.python.org/downloads/) installed on your computer. If you would rather not use Git, you can just download the script from GitHub above. From your command line:
+## Installation
 
 ```bash
-# Clone this repository
-$ git clone https://github.com/willtheorangeguy/Auto-Anouncements
-
-# Go into the repository
-$ cd Auto-Announcements
-
-# Run the CLI
-$ python send.py
+git clone https://github.com/willtheorangeguy/Auto-Anouncements
+cd Auto-Anouncements
+python -m send
 ```
 
-### `pip`
+**You also need a mail relay on `localhost:25`.** The SMTP host is hardcoded, with no authentication and no TLS, so this works on a machine with a configured relay and nowhere else. See [`docs/installation.md`](docs/installation.md).
 
-You can install the program from the [Python Package Index](https://pypi.org/project/Auto-Annoucements/) through `pip`.
+## Usage
 
-```bash
-# Install via pip
-$ pip install auto-announcements
-
-# Run the CLI
-$ auto-announcements
+```
+$ python -m send
+YOUR email address: me@example.org
+RECIPIENT's email address: them@example.org
+Message sent successfully on 2026-08-18 …!
 ```
 
-### Docker
+Changing the message body, or fixing the addresses so it stops asking, means editing `send/send.py` — see [`docs/configuration.md`](docs/configuration.md).
 
-You can pull the [Docker](https://www.docker.com/) image from GitHub Packages. From your command line:
+## Documentation
 
-```bash
-# Pull image
-$ docker pull ghcr.io/willtheorangeguy/auto-announcements:master
-
-# Run container
-$ docker run -i -t ghcr.io/willtheorangeguy/auto-announcements:master python send.py
-```
+Full documentation lives in [`docs/`](docs/index.md):
+[Quickstart](docs/quickstart.md) · [Installation](docs/installation.md) · [Configuration](docs/configuration.md) · [Architecture](docs/architecture.md) · [Development](docs/development.md) · [FAQ](docs/faq.md) · [Troubleshooting](docs/troubleshooting.md) · [Roadmap](docs/roadmap.md)
 
 ## Support
 
-Customization for Auto Announcements can be found in the [`CUSTOMIZATION`](https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/customization-guide.md) doc. More documentation is available in the **[Documentation](https://github.com/willtheorangeguy/Auto-Anouncements/tree/master/docs)** and on the **[Wiki](https://github.com/willtheorangeguy/Auto-Anouncements/wiki)**. If more support is required, please open a **[GitHub Discussion](https://github.com/willtheorangeguy/Auto-Anouncements/discussions)** or join our **[Discord](https://discord.gg/XVBj6WGjap)**.
+Open a [GitHub Discussion](https://github.com/willtheorangeguy/Auto-Anouncements/discussions), file an [issue](https://github.com/willtheorangeguy/Auto-Anouncements/issues/new/choose), or join the [Discord](https://discord.gg/XVBj6WGjap).
 
 ## Contributing
 
 Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and [open a pull request](https://github.com/willtheorangeguy/Auto-Anouncements/compare).
 
-Please read [`CONTRIBUTING`](CONTRIBUTING.md) for details on our [`CODE OF CONDUCT`](CODE_OF_CONDUCT.md), and the process for submitting pull requests to us.
-
-## Changelog
-
-See the [`CHANGELOG`](CHANGELOG.md) file for details.
+See the org-wide [Contributing Guide](https://github.com/willtheorangeguy/.github/blob/main/CONTRIBUTING.md) and [Code of Conduct](https://github.com/willtheorangeguy/.github/blob/main/CODE_OF_CONDUCT.md).
 
 ## Credits
 
@@ -146,16 +111,8 @@ This software uses the following open source packages, projects, services or web
   </tr>
 </table>
 
-## Contributors
-
-* [@willtheorangeguy](https://github.com/willtheorangeguy) - Sponsor on [PayPal](https://paypal.me/wvdg44?country.x=CA&locale.x=en_US)
-
-## You may also like...
-
-* [ProgramVer](https://github.com/willtheorangeguy/ProgramVer) - An open-source, Python GUI version window to show copyright info and licenses.
-* [PyWorkout](https://github.com/willtheorangeguy/PyWorkout) - A minimal CLI to keep you inspired during your workout!
-* [PyAvatar](https://github.com/willtheorangeguy/PyAvatar) - Easily display all of your creative avatars to keep them consistent across websites.
+Sponsor [@willtheorangeguy](https://github.com/willtheorangeguy) on [PayPal](https://paypal.me/wvdg44?country.x=CA&locale.x=en_US).
 
 ## License
 
-This project is licensed under the [MIT License](https://mit-license.org/) - see the [`LICENSE`](LICENSE.md) file for details. See the [Privacy Policy](https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/legal/PRIVACY.md), [Terms and Conditions](https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/legal/TERMS.md), and [EULA](https://github.com/willtheorangeguy/Auto-Anouncements/blob/master/docs/legal/EULA.md) for legal information.
+MIT — see [`LICENSE.md`](LICENSE.md).
