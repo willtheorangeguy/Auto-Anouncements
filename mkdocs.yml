@@ -1,0 +1,46 @@
+# Documentation configuration for Auto-Anouncements.
+# Shared theme, plugins, and validation are inherited from the template repo.
+
+INHERIT: .mkdocs-shared/shared/mkdocs.base.yml
+
+site_name: Auto Announcements
+site_description: A bot framework that sends an HTML announcement email to a specified address through a local SMTP relay.
+site_author: willtheorangeguy
+site_url: https://williamvdg.me/Auto-Anouncements/
+
+repo_url: https://github.com/willtheorangeguy/Auto-Anouncements
+repo_name: willtheorangeguy/Auto-Anouncements
+edit_uri: edit/master/docs/
+
+copyright: Copyright &copy; willtheorangeguy
+
+theme:
+  logo: images/logo.png
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Installation: installation.md
+  - Usage: usage-guide.md
+  - Configuration: configuration.md
+  - Customization: customization-guide.md
+  - Architecture: architecture.md
+  - API: api.md
+  - Development:
+      - Development guide: development.md
+      - Testing: testing.md
+      - CI/CD: ci-cd.md
+  - Help:
+      - FAQ: faq.md
+      - Troubleshooting: troubleshooting.md
+      - Roadmap: roadmap.md
+  - About:
+      - Changelog: changelog.md
+      - License: license.md
+      - Contributing: https://github.com/willtheorangeguy/.github/blob/main/CONTRIBUTING.md
+      - Code of Conduct: https://github.com/willtheorangeguy/.github/blob/main/CODE_OF_CONDUCT.md
+      - Security: https://github.com/willtheorangeguy/.github/blob/main/SECURITY.md
+
+exclude_docs: |
+  docs.instructions.md
+  internal/
