@@ -1,82 +1,46 @@
-# Auto Announcements — Troubleshooting
+# Troubleshooting
 
-## `ConnectionRefusedError: [Errno 111] Connection refused`
+## Connection refused or timeout
 
-The most common failure. `smtplib.SMTP("localhost")` found nothing listening on port 25.
+Check `smtp.host`, `smtp.port`, and whether the relay is reachable. The default
+`localhost:25` requires a local relay. For Docker, use a relay reachable from the
+container. Configuration does not create a mail server.
 
-| Situation | What to do |
-|---|---|
-| No relay on this machine | Install one (Postfix, or your platform's equivalent) |
-| Relay on another host | Edit the `smtplib.SMTP(...)` call — there is no option for it |
-| Just testing | Run a debug server and point the code at its port |
+## Set the password environment variable
 
-```bash
-pip install aiosmtpd
-python -m aiosmtpd -n -l localhost:8025
-# then change smtplib.SMTP("localhost") to smtplib.SMTP("localhost", 8025)
-```
+Set the environment variable named by `smtp.password_env` before starting the
+script. The default is `AUTO_ANNOUNCEMENTS_PASSWORD`. An interactive shell's
+variables may not be available to cron, Task Scheduler, or a service.
 
-## It fails inside Docker
+## Authentication or certificate failure
 
-Expected. The image has no mail server, and the code connects to `localhost`. Nothing in the
-containerised path can send. See [Installation](./installation.md).
+Match the host, port, and `security` to your provider's settings. Authentication
+requires `starttls` or `ssl`. Use your provider's SMTP credentials or app password.
+Certificate validation stays enabled.
 
-## `SMTPRecipientsRefused`
+## Missing body or attachment
 
-The relay accepted the connection and rejected the address — a typo, or a relay configured not to
-send to external domains. Check the address, then the relay's own policy.
-
-## `python: can't open file 'send.py'`
-
-The file is `send/send.py`. Use:
+Paths are relative to the JSON configuration file. Check spelling, permissions,
+and that every configured file exists. Validate without submitting email:
 
 ```bash
-python -m send
+python -m send --config config.json --dry-run
 ```
 
-## `cd: Auto-Announcements: No such file or directory`
+## The scheduler has not sent
 
-The repository is misspelled: `Auto-Anouncements`, one `n`.
+Check the printed next occurrence and the computer's local timezone. Scheduled
+mode waits until the next future occurrence. It must remain running, and it
+cannot send while the computer is asleep. Compose defaults to UTC unless `TZ`
+is set.
 
-```bash
-cd Auto-Anouncements
-```
+## Recipient refused or no inbox delivery
 
-## `pip install Auto-Annoucements` finds nothing
+A relay can refuse some recipients while accepting others. The script reports
+partial refusal as a failure and does not retry automatically. Check the relay's
+logs before resending. A success message means SMTP acceptance, not inbox delivery.
 
-Also a spelling problem, and this one is in the packaging rather than your typing:
+## The body has not changed
 
-```bash
-pip install auto-announcements
-```
-
-`setup.cfg` declares the misspelled name and the old README linked to it. Recorded in
-[`internal/known-issues.md`](./internal/known-issues.md).
-
-## The email arrived with the wrong content
-
-The body is `<h1>A Heading</h1><p>Hello There!</p>`, hardcoded in `send/send.py`. It is not read
-from `message.html`, whatever that file's presence suggests. See
-[Configuration](./configuration.md).
-
-## The subject mentions a church
-
-A leftover literal. Same file.
-
-## It asks for addresses every time
-
-By design — they are `input()` calls. Replacing them with literals is the documented
-customisation; [Configuration](./configuration.md) names the symbols, since the old instructions
-cited line numbers that no longer match.
-
-## No error, but no email
-
-The relay accepted it and dropped it, or delivered it somewhere unexpected. Check the relay's
-logs — the script prints "Message sent successfully" as soon as `sendmail` returns, which only
-means the relay took responsibility for it.
-
-## Still stuck
-
-[Open an issue](https://github.com/willtheorangeguy/Auto-Anouncements/issues/new/choose) or ask
-on the [Discord](https://discord.gg/XVBj6WGjap), with the traceback and what mail relay you are
-using.
+Confirm `message_file` points at the file you edited. File contents are reread
+at delivery time. Changes to configuration values require a process restart.

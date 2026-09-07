@@ -1,0 +1,2 @@
+include config.example.json
+include message.html

@@ -1,73 +1,52 @@
 # CLAUDE.md
 
-## Project Overview
+## Project overview
 
-Auto Announcements is a Python bot framework that automatically sends HTML email announcements to a specified email address via SMTP. Originally designed for church announcements, it can be customized for any recurring email use case.
+Auto Announcements is a Python script that sends an HTML or plain-text email body
+and optional attachments through SMTP, immediately or on a daily/weekly schedule.
 
-## Repository Structure
+## Repository structure
 
-```
-__main__.py          # Entry point, imports and calls send.send.main()
-send/send.py         # Core logic: prompts for email addresses, builds MIMEText, sends via SMTP
-message.html         # Sample HTML email template (Microsoft Word-generated)
-setup.py             # Legacy setuptools config
-pyproject.toml       # Modern build config (setuptools backend)
-requirements.txt     # Dev/test dependencies only (pytest, pytest-mock, pytest-cov)
-Dockerfile           # Container build
-docker-compose.yml   # Container orchestration
-tests/test_send.py   # Pytest suite for send module
+```text
+__main__.py             Root script entry point
+send/__main__.py        python -m send entry point
+send/send.py            Configuration, message building, SMTP, scheduling, CLI
+config.example.json     Example JSON configuration
+message.html            Editable sample HTML body
+tests/test_send.py      Mocked transport and scheduler tests
+pyproject.toml          Build metadata and console entry point
+setup.py, setup.cfg    Legacy packaging compatibility
+Dockerfile             Container build
+docker-compose.yml     Scheduler service with mounted data directory
 ```
 
 ## Development
 
-### Prerequisites
-
-- Python >= 3.9
-
-### Install dependencies
+Python >= 3.9 is required. Runtime dependencies are all in the standard library.
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
+python -m send --config config.example.json --dry-run
+python -m pytest tests/ -v --cov=send --cov-report=term-missing
 ```
 
-### Run the application
+Unit tests mock SMTP and waiting. The CLI integration test uses a loopback SMTP
+sink that never relays messages. Do not deliver external email during validation.
 
 ```bash
-python __main__.py
+python -m pip install pylint build
+python -m pylint send __main__.py __init__.py setup.py
+python -m build
 ```
 
-The app prompts interactively for sender and recipient email addresses, then sends an HTML email via `localhost` SMTP.
+## Conventions
 
-### Run tests
-
-```bash
-pytest tests/ -v --cov=send --cov-report=term-missing
-```
-
-All tests mock SMTP and user input — no network or mail server needed.
-
-### Lint
-
-```bash
-pylint $(git ls-files '*.py' ':!tests/**')
-```
-
-Pylint runs on all Python files except tests. The codebase uses `pylint: disable` comments for `invalid-name`, `import-error`, and `global-variable-undefined`.
-
-## CI/CD
-
-- **Pytest**: Runs on push and PR, Python 3.9-3.12
-- **Pylint**: Runs on push, Python 3.9 only, excludes `tests/`
-- **CodeQL**: Security analysis
-- **Docker publish**: Builds and publishes container image
-- **PyPI publish**: Publishes package to PyPI
-
-## Key Conventions
-
-- Package name: `auto-announcements` (with hyphen), version `0.2.0`
-- Single module structure: `send/send.py` contains all logic in one `main()` function
-- SMTP connects to `localhost` — no authentication configured
-- Email body is hardcoded HTML in `send.py`; `message.html` is a reference template not loaded at runtime
-- No runtime dependencies beyond the Python standard library
-- Test dependencies are in `requirements.txt` (not in `pyproject.toml`)
-- License: MIT
+- Four-space indentation, double-quoted strings, snake_case functions, docstrings.
+- Module docstring and copyright header on application modules.
+- Keep the application logic in `send/send.py`, with focused helper functions.
+- Package and console command: `auto-announcements`, version `0.2.0`.
+- Keep SMTP passwords in environment variables, never JSON or source control.
+- Configuration paths resolve relative to the JSON file.
+- The scheduler uses the computer's local time and does not persist delivery history.
+- Read `docs/docs.instructions.md` before editing documentation.
+- License: MIT.

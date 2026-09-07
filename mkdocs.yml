@@ -4,7 +4,7 @@
 INHERIT: .mkdocs-shared/shared/mkdocs.base.yml
 
 site_name: Auto Announcements
-site_description: A bot framework that sends an HTML announcement email to a specified address through a local SMTP relay.
+site_description: A Python script that emails announcement files immediately or on a daily or weekly schedule.
 site_author: willtheorangeguy
 site_url: https://williamvdg.me/Auto-Anouncements/
 

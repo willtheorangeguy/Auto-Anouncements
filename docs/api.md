@@ -1,29 +1,21 @@
 # API
 
-Auto Announcements exposes one public Python function, `send.main()`. The console scripts and
-module entry points call the same function. It prompts for two addresses, creates the fixed HTML
-message, and sends it through an SMTP relay on `localhost`.
-
-## Calling `main`
-
-Call `main()` only when a local SMTP relay is available. The function takes no arguments and
-returns `None` after the SMTP call succeeds.
+Start with `send.main(argv)` for the command-line workflow. It returns an exit
+status. File and SMTP failures return 1; invalid arguments raise `SystemExit(2)`.
+The lower-level helpers raise their errors to the caller.
 
 ```python
 from send import main
 
-main()
+status = main(["--config", "config.example.json", "--dry-run"])
+print(status)
 ```
+
+The command prints a message summary and next scheduled time, followed by:
 
 ```text
-YOUR email address:sender@example.com
-RECIPIENT's email address:recipient@example.com
-2026-08-22 12:00:00
-Message sent successfully on 2026-08-22 12:00:00 !
+0
 ```
-
-The timestamps reflect the time of the run. If no relay accepts the connection on
-`localhost:25`, the SMTP exception propagates to the caller.
 
 ## Reference
 
@@ -31,3 +23,8 @@ The timestamps reflect the time of the run. If no relay accepts the connection o
     options:
       members:
         - main
+        - load_config
+        - build_message
+        - send_announcement
+        - next_run
+        - run_schedule

@@ -1,66 +1,63 @@
-# Auto Announcements — Quickstart
+# Quickstart
 
-## You need a local mail relay first
+You need Python 3.9 or newer. SMTP access is required for delivery, but you can
+validate the example without an account or network connection.
 
-```python
-s = smtplib.SMTP("localhost")
-```
-
-The SMTP host is hardcoded. Without something listening on `localhost:25` and willing to accept
-unauthenticated mail, the program raises `ConnectionRefusedError` at the last line.
-
-To try it without a real relay, Python's built-in debugging server prints messages instead of
-sending them:
-
-```bash
-python -m aiosmtpd -n -l localhost:8025    # note: port 8025, not 25
-```
-
-That needs `pip install aiosmtpd`, and you would still have to edit the port in `send/send.py` —
-there is no flag for it.
-
-## Run it
+## Install
 
 ```bash
 git clone https://github.com/willtheorangeguy/Auto-Anouncements
 cd Auto-Anouncements
-python -m send
+python -m send --config config.example.json --dry-run
 ```
 
-Note the directory is `Auto-Anouncements` — one `n` in "Anouncements". The repository name is
-misspelled, and earlier documentation told you to `cd Auto-Announcements`, which does not exist.
+The output starts with `Ready:` and lists the example recipient, attachment count,
+and next Saturday at 18:00 in your computer's local timezone.
 
-```text
-YOUR email address: me@example.org
-RECIPIENT's email address: them@example.org
-2026-08-18 14:02:11.123456
-Message sent successfully on 2026-08-18 14:02:11.123456 !
-```
+## Configure your announcement
 
-## What arrives
+Copy `config.example.json` to `config.json`. Set your sender, recipients, and SMTP
+provider settings. Edit `message.html` with your announcement body. To send a PDF
+or another file, put its path in `attachments`, for example
+`["announcements.pdf"]`. Paths are relative to the configuration file.
 
-| Field | Value |
-|---|---|
-| Subject | `Church Announcements for 2026-08-18` |
-| From | Whatever you typed |
-| To | Whatever you typed |
-| Body | `<h1>A Heading</h1><p>Hello There!</p>` |
+Set the password in the environment when using authenticated SMTP:
 
-The subject prefix and the body are literals in `send/send.py`. `message.html` in the repository
-root looks like the intended body and is not read by anything.
+<!-- markdownlint-disable MD046 -->
 
-## Changing any of that
+=== "Windows"
 
-Edit `send/send.py` — see [Configuration](./configuration.md), which names each string by symbol
-rather than by line number.
+    ```powershell
+    $env:AUTO_ANNOUNCEMENTS_PASSWORD = "your-app-password"
+    ```
 
-## Installed as a command
+=== "macOS / Linux"
+
+    ```bash
+    export AUTO_ANNOUNCEMENTS_PASSWORD='your-app-password'
+    ```
+
+<!-- markdownlint-enable MD046 -->
+
+Use the credentials and transport settings supplied by your email provider.
+
+## Validate and send
 
 ```bash
-pip install auto-announcements
-auto-announcements
+python -m send --config config.json --dry-run
+python -m send --config config.json --once
 ```
 
-The console script resolves through `send/__init__.py`, which re-exports `main`. Note the three
-packaging files disagree about the project's name — see
-[`internal/known-issues.md`](./internal/known-issues.md).
+Successful submission prints `Message accepted by SMTP server on` followed by the
+time. The relay still controls final inbox delivery.
+
+## Start the schedule
+
+```bash
+python -m send --config config.json --schedule
+```
+
+The script waits for the next Saturday at 18:00 and repeats weekly. Keep the
+process running and the computer awake. Press Ctrl+C to stop it. See
+[Usage](usage-guide.md) for restart, sleep, and failure behavior, and
+[Configuration](configuration.md) for daily schedules and other settings.

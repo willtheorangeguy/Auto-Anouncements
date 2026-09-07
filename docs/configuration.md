@@ -1,70 +1,91 @@
-# Auto Announcements — Configuration
+# Configuration
 
-There is no configuration file, no environment variable, and no command-line flag. Everything is
-a literal in `send/send.py`.
+## Precedence
 
-Earlier documentation gave **line numbers** for these edits, and they no longer match the file.
-This page names the symbols instead.
+Command-line flags select the configuration and run mode. JSON settings override
+built-in defaults. The password comes only from the environment variable named by
+`smtp.password_env`; other environment variables do not override JSON settings.
+Unknown options, invalid values, and missing files are fatal at startup.
 
-## The sender and recipient prompts
+File paths are relative to the configuration file's directory, including when you
+launch from another directory. Without `--config`, the script prompts for two
+addresses and reads `message.html` from the current directory using a local relay.
 
-```python
-sendaddress = input("YOUR email address:")
-receiveaddress = input("RECIPIENT's email address:")
+## Configuration file
+
+Copy `config.example.json` to `config.json`, then edit the copy. Local
+`config.json` files are ignored by Git.
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `sender` | string | required | One bare ASCII address, e.g. `announcements@example.org` |
+| `recipients` | list | required | Bare addresses, e.g. `["recipient@example.org"]` |
+| `subject` | string | `Church Announcements for {date}` | Replaces `{date}` with the local send date |
+| `message_file` | path | `message.html` | UTF-8 body; `.html` and `.htm` produce HTML, other extensions produce plain text |
+| `attachments` | list | `[]` | Files to attach, e.g. `["announcements.pdf"]`; binary contents are preserved |
+| `smtp.host` | string | `localhost` | Relay hostname, e.g. `smtp.example.org` |
+| `smtp.port` | integer | `25` | Explicit port from 1 to 65535; e.g. `587` for STARTTLS or `465` for SSL |
+| `smtp.security` | string | `none` | One of `none`, `starttls`, `ssl`; TLS verifies certificates |
+| `smtp.username` | string | `""` | Login name, e.g. `announcements@example.org`; empty disables authentication |
+| `smtp.password_env` | string | `AUTO_ANNOUNCEMENTS_PASSWORD` | Name of the environment variable containing the SMTP password |
+| `smtp.timeout` | integer | `30` | Positive connection/socket timeout in seconds |
+| `schedule.day` | string | `saturday` | `daily`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, or `sunday` |
+| `schedule.time` | string | `18:00` | Computer local time in 24-hour `HH:MM` format |
+
+Authentication requires `starttls` or `ssl`. Set the port explicitly to match your
+provider. The dry run validates the message and files without requiring a password
+or opening an SMTP connection.
+
+## Environment variables
+
+| Option                        | Type   | Default | Description                                                                 |
+| ----------------------------- | ------ | ------- | --------------------------------------------------------------------------- |
+| `AUTO_ANNOUNCEMENTS_PASSWORD` | string | unset   | SMTP password, e.g. `your-app-password`; rename through `smtp.password_env` |
+
+The script does not load `.env` files. Docker Compose passes
+`AUTO_ANNOUNCEMENTS_PASSWORD` into the container and uses `TZ` for the container
+timezone, defaulting to `UTC`. For a renamed password variable, update Compose too.
+
+## Command-line flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--config` | path | none | JSON file, e.g. `config.json` |
+| `--once` | flag | on | Send immediately and exit |
+| `--schedule` | flag | off | Wait for recurring delivery; requires `--config` |
+| `--dry-run` | flag | off | Validate files and show recipients, attachment count, and next time |
+| `--help` | flag | off | Print usage |
+
+The three run modes are mutually exclusive.
+
+## Examples
+
+The repository example uses authenticated STARTTLS and Saturday at 18:00:
+
+```bash
+python -m send --config config.example.json --dry-run
 ```
 
-To stop it asking, replace either `input(...)` call with a literal:
+For a local unauthenticated relay, a complete configuration is:
 
-```python
-sendaddress = "announcements@example.org"
+```json title="config.json"
+{
+    "sender": "sender@example.org",
+    "recipients": ["recipient@example.org"],
+    "message_file": "message.html",
+    "attachments": [],
+    "smtp": {"host": "localhost", "port": 25, "security": "none"},
+    "schedule": {"day": "daily", "time": "09:00"}
+}
 ```
 
-That is the whole of the "email addresses can be hard coded" feature — an edit you make, not
-something the program supports.
+Send once or start the scheduler after configuring your addresses and relay:
 
-## The message body
-
-```python
-msg = MIMEText("<h1>A Heading</h1><p>Hello There!</p>", "html")
+```bash
+python -m send --config config.json --once
+python -m send --config config.json --schedule
 ```
 
-A hardcoded string. To send real content, put your HTML there — or read a file:
-
-```python
-with open("message.html", encoding="utf-8") as f:
-    msg = MIMEText(f.read(), "html")
+```bash
+python -m send --help
 ```
-
-**`message.html` already exists in the repository** — 57 lines of Word-generated HTML — and
-nothing reads it. It appears to be the intended body from a previous design. Recorded in
-[`internal/known-issues.md`](./internal/known-issues.md).
-
-## The subject
-
-```python
-msg["Subject"] = "Church Announcements for " + date_today
-```
-
-The prefix is a literal, left over from the original use. Change it for anything else.
-
-## The SMTP server
-
-```python
-s = smtplib.SMTP("localhost")
-```
-
-Hardcoded, with no port, no `starttls()`, and no `login()`. To use a real provider you would need
-all three:
-
-```python
-s = smtplib.SMTP("smtp.example.org", 587)
-s.starttls()
-s.login(username, password)
-```
-
-Which also means finding somewhere to keep the password — there is no mechanism for that here.
-
-## What is not configurable
-
-Everything above requires editing the source. There is no argument parsing in this program at
-all: `main()` takes no parameters, and the console script passes none.

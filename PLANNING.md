@@ -2,8 +2,8 @@
 
 ## Version 1.0.0
 
-- [ ] Finalize program.
-- [ ] Have emails and attachments actually send.
+- [x] Implement configurable SMTP delivery, file loading, and daily/weekly scheduling.
+- [x] Have emails and attachments actually send.
 
 ## Version 1.1.0
 

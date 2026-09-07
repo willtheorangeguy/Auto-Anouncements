@@ -1,10 +1,9 @@
 # syntax=docker/dockerfile:1
 
-FROM python:3
+FROM python:3.13-slim
 RUN useradd --create-home --shell /bin/bash app_user
 WORKDIR /home/app_user
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+ENV PYTHONUNBUFFERED=1
 USER app_user
 COPY . .
-CMD ["bash"]
+CMD ["python", "-m", "send", "--config", "data/config.json", "--schedule"]

@@ -1,67 +1,36 @@
-# Auto Announcements — Development
+# Development guide
 
 ## Setup
 
 ```bash
-git clone https://github.com/willtheorangeguy/Auto-Anouncements
-cd Auto-Anouncements
-pip install -r requirements.txt
-python -m send
+python -m pip install -r requirements.txt
+python -m pip install pylint build
+python -m send --config config.example.json --dry-run
 ```
-
-Note the misspelled directory name — `Anouncements`, one `n`.
-
-## Layout
-
-| Path | Contents |
-|---|---|
-| `send/send.py` | The program |
-| `send/__init__.py` | Re-exports `main` for the console script |
-| `message.html` | An email body nothing reads |
-| `tests/` | The suite |
-| `Dockerfile`, `docker-compose.yml` | Container build |
-| `setup.py`, `setup.cfg`, `pyproject.toml` | Three descriptions of the package |
-
-## Testing
-
-The sending path cannot be tested without either a live SMTP server or a patched `smtplib`.
-Patching is the right answer:
-
-```python
-@patch("send.send.smtplib.SMTP")
-def test_sends(self, mock_smtp):
-    ...
-```
-
-That makes the whole of `main()` assertable — the subject format, the headers, the body — without
-a network or a relay. It also isolates the one thing this program does.
-
-## Packaging
-
-Three files, three names, one of them a typo (`auto-annoucements` in `setup.cfg`). Which one is
-published depends on which the build backend reads.
-
-Consolidating on `pyproject.toml` and deleting the other two would remove both the duplication
-and the chance of publishing under the wrong name. See
-[`internal/known-issues.md`](./internal/known-issues.md).
 
 ## Style
 
-- **Module docstring and copyright header** on every file.
-- **Pylint**, with per-file disables at the top. Note the existing
-  `# pylint: disable=global-variable-undefined` exists to silence a warning about a `global` that
-  serves no purpose — removing the `global` would be better than keeping the disable.
+Keep four-space indentation, double-quoted strings, snake_case functions, and
+module/function docstrings. New modules carry the copyright header. Application
+code uses the Python standard library and remains compatible with Python 3.9.
 
-## If you implement the documented features
+The core remains in `send/send.py`, split into functions for configuration,
+message construction, transport, scheduling, and CLI handling. See
+[Architecture](architecture.md) before changing the delivery flow.
 
-The README used to promise scheduling, attachments, and a configurable body. If you build them:
+## Validation
 
-- **The body** should read `message.html`, which is already in the repository and already looks
-  like the intended content.
-- **Configuration** should come before scheduling — a scheduler that sends a hardcoded message to
-  a hardcoded address is not much use, and the SMTP host needs to be settable first.
+```bash
+python -m pytest tests/ -v --cov=send --cov-report=term-missing
+python -m pylint send __main__.py __init__.py setup.py
+python -m build
+```
+
+The build produces a source distribution and wheel in `dist`. Packaging files
+use the name `auto-announcements`; the public console entry point is `send:main`.
 
 ## Recording defects
 
-Bugs found while working here go in [`internal/known-issues.md`](./internal/known-issues.md)
-rather than being fixed in passing, unless fixing them is the job you are on.
+Record unresolved implementation gaps in
+[Known issues](internal/known-issues.md). Update usage and configuration
+documentation when behavior changes.

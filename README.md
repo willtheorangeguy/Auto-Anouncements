@@ -7,7 +7,7 @@
 </h1>
 
 <!-- Copy -->
-<h4 align="center">A small script that sends an HTML announcement email through a local SMTP relay.</h4>
+<h4 align="center">A Python script that emails announcement files immediately or on a daily or weekly schedule.</h4>
 
 <!-- Badges -->
 <div align="center">
@@ -37,38 +37,56 @@
 
 ## Status
 
-**Early, and smaller than it looks.** The whole program is 38 lines: it prompts for two email addresses, builds a fixed one-line HTML message, and hands it to an SMTP server on `localhost`.
-
-There is **no scheduler, no file attachment, and no message-template loading** — earlier versions of this README described all three. `message.html` sits in the repository and nothing reads it. See [`docs/roadmap.md`](docs/roadmap.md) for what is intended, and [`docs/internal/known-issues.md`](docs/internal/known-issues.md) for what was documented but never built.
+The script reads an HTML or plain-text body, attaches your announcement files, and submits email through a configured SMTP server. Run it once or keep it running for daily or weekly delivery. Python 3.9 or newer is required, with no runtime dependencies.
 
 ## Key Features
 
-- Prompts for the sender and recipient addresses at run time.
-- Sends a `text/html` message with the date in the subject line.
-- Runs anywhere Python does, with no dependencies.
+- Loads the email body and attachments from files before each delivery.
+- Configures recipients, subject, SMTP, and schedule through JSON.
+- Supports authenticated SMTP with STARTTLS or SSL and verified certificates.
+- Sends daily or on a chosen weekday at a local clock time.
+- Validates your files with `--dry-run` before sending.
 
-It requires an SMTP server listening on `localhost` — see [Installation](#installation).
+Delivery requires an SMTP account or relay — see [Configuration](docs/configuration.md).
 
 ## Installation
 
 ```bash
 git clone https://github.com/willtheorangeguy/Auto-Anouncements
 cd Auto-Anouncements
-python -m send
+python -m send --config config.example.json --dry-run
 ```
 
-**You also need a mail relay on `localhost:25`.** The SMTP host is hardcoded, with no authentication and no TLS, so this works on a machine with a configured relay and nowhere else. See [`docs/installation.md`](docs/installation.md).
+The dry run needs no credentials and sends no email. To install the console command, run `python -m pip install .`. See [`docs/installation.md`](docs/installation.md) for Docker setup.
 
 ## Usage
 
-```
-$ python -m send
-YOUR email address: me@example.org
-RECIPIENT's email address: them@example.org
-Message sent successfully on 2026-08-18 …!
+1. Copy `config.example.json` to `config.json` and set your sender, recipients, and SMTP settings.
+2. Edit `message.html`. Put announcement file paths in `attachments`, for example `["announcements.pdf"]`. Paths are relative to your configuration file.
+3. Set the password environment variable for authenticated SMTP. In PowerShell:
+
+```powershell
+$env:AUTO_ANNOUNCEMENTS_PASSWORD = "your-app-password"
 ```
 
-Changing the message body, or fixing the addresses so it stops asking, means editing `send/send.py` — see [`docs/configuration.md`](docs/configuration.md).
+On macOS or Linux, use `export AUTO_ANNOUNCEMENTS_PASSWORD='your-app-password'`.
+
+Validate your files, then send one announcement:
+
+```bash
+python -m send --config config.json --dry-run
+python -m send --config config.json --once
+```
+
+Start recurring delivery:
+
+```bash
+python -m send --config config.json --schedule
+```
+
+The example schedule is Saturday at 18:00 in your computer's local timezone. Keep the process running and the computer awake. Ctrl+C stops it. File contents are reread each time; restart after changing JSON settings. Failures are reported without automatic retries. See [Usage](docs/usage-guide.md) for sleep and restart behavior.
+
+`python __main__.py` and the installed `auto-announcements` command accept the same flags. Running without flags preserves the two-address interactive workflow using `message.html` and `localhost:25`.
 
 ## Documentation
 

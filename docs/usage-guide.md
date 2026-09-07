@@ -1,33 +1,73 @@
-# Auto Announcements Usage
+# Usage
 
-To install Auto Announcements, you can use an executable package (Windows), run the scripts through Python (Windows, macOS, Linux), install from the [Python Package Index](https://pypi.org/), or run a [Docker](https://www.docker.com/) container from [GitHub Packages](https://github.com/willtheorangeguy/Auto-Anouncements/pkgs/container/auto-anouncements). To customize the program to your needs, see [`CUSTOMIZATION`](customization-guide.md).
+Run a configured announcement immediately, validate it, or keep the scheduler running.
 
-## Executable Package
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--config` | path | none | Load JSON settings; e.g. `config.json` |
+| `--once` | flag | on | Submit one email and exit |
+| `--dry-run` | flag | off | Read files and show a summary without contacting SMTP |
+| `--schedule` | flag | off | Wait for the next configured daily or weekly time |
+| `--help` | flag | off | Show command help |
 
-1. To run the executable package, download the latest `.zip` file from [GitHub Releases](https://github.com/willtheorangeguy/Auto-Anouncements/releases/latest) page.
-2. Extract the `.zip` file using a program like [7-Zip](https://www.7-zip.org/).
-3. _(Optional) Move the files to `C:\Program Files` and create a shortcut._
-4. Double click on `send.exe`.
-5. Enjoy the program!
+## Validate and send once
 
-## Python Script
+```bash
+python -m send --config config.example.json --dry-run
+python -m send --help
+```
 
-1. To run the Python script, download the latest source code release from [GitHub Releases](https://github.com/willtheorangeguy/Auto-Anouncements/releases/latest) page.
-2. Download and install [Python](https://www.python.org/downloads/).
-3. Extract the source code files using a program like [7-Zip](https://www.7-zip.org/).
-4. Double click on `send.py`, or right-click and open with IDLE and press `F5`.
-5. Enjoy the program!
+After preparing your own configuration:
 
-## Python Package Index (`pip`)
+```bash
+python -m send --config config.json --once
+```
 
-1. Download and install [Python](https://www.python.org/downloads/).
-2. Open a terminal and run the command: `pip install auto-announcements`.
-3. Start the program by running the command: `auto-announcements`.
-4. Enjoy the program!
+The root script and installed console command accept the same flags:
 
-## Docker Container
+```bash
+python __main__.py --config config.example.json --dry-run
+auto-announcements --config config.example.json --dry-run
+```
 
-1. Download and install [Docker](https://www.docker.com/products/docker-desktop/).
-2. Open a terminal and pull the container: `docker pull ghcr.io/willtheorangeguy/auto-announcements:master`.
-3. Start the container: `docker run -i -t ghcr.io/willtheorangeguy/auto-announcements:master python main.py`.
-4. Enjoy the program!
+Without a configuration, `python -m send` prompts for addresses, reads
+`message.html` in the current directory, and submits to `localhost:25`.
+
+## Recurring delivery
+
+```bash
+python -m send --config config.json --schedule
+```
+
+Times follow the computer's local clock, including daylight saving changes.
+The process waits for the next occurrence strictly after startup. It does not send
+immediately, install a background service, or wake a sleeping computer.
+
+The body and attachments are reread before every delivery, so you can replace the
+files between runs. Restart the process after changing JSON settings.
+
+A running process that resumes after a missed time attempts one delivery and
+advances to the next future occurrence. It does not send a backlog. During a
+spring clock change, a skipped time runs when the clock next passes it. During a
+fall clock change, a completed daily slot is not repeated by that process.
+
+No delivery history is stored. Run one scheduler per configuration. Restarting the
+program schedules the next future occurrence and does not recover missed runs.
+
+## Errors and stopping
+
+Ctrl+C stops cleanly. One-shot file, configuration, or SMTP failures return exit
+status 1. Invalid CLI arguments return status 2. Scheduled delivery failures print
+to stderr and the process continues with the next scheduled occurrence.
+
+Failed submissions are not retried automatically: a relay may have accepted mail
+before a connection failed, or accepted only some recipients. Inspect the relay's
+delivery log before deciding to send again. SMTP acceptance does not guarantee
+inbox delivery.
+
+## External schedulers
+
+For cron or Windows Task Scheduler, invoke the one-shot command with an absolute
+configuration path and arrange for the password environment variable to be
+available. Use the built-in `--schedule` mode only when you intend to keep the
+process running.

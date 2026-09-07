@@ -1,0 +1,19 @@
+{
+    "sender": "announcements@example.org",
+    "recipients": ["recipient@example.org"],
+    "subject": "Church Announcements for {date}",
+    "message_file": "message.html",
+    "attachments": [],
+    "smtp": {
+        "host": "smtp.example.org",
+        "port": 587,
+        "security": "starttls",
+        "username": "announcements@example.org",
+        "password_env": "AUTO_ANNOUNCEMENTS_PASSWORD",
+        "timeout": 30
+    },
+    "schedule": {
+        "day": "saturday",
+        "time": "18:00"
+    }
+}

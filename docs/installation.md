@@ -1,71 +1,67 @@
-# Auto Announcements — Installation
+# Installation
 
 ## Requirements
 
-| | |
-|---|---|
-| Python | 3.x |
-| Dependencies | None |
-| **An SMTP relay on `localhost:25`** | Not optional — the host is hardcoded |
+Python 3.9 or newer runs the application with no runtime dependencies. Delivery
+requires access to an SMTP relay or provider. Configure its host, port, transport,
+and credentials in [Configuration](configuration.md).
 
-The last row is the one that decides whether this works for you. There is no host, port,
-username, password, or TLS option anywhere in the code.
-
-## From source
+## Install from source
 
 ```bash
 git clone https://github.com/willtheorangeguy/Auto-Anouncements
 cd Auto-Anouncements
-python -m send
+python -m pip install .
 ```
 
-The directory is `Auto-Anouncements` — the repository name is missing an `n`. Earlier
-documentation said `cd Auto-Announcements` and `python send.py`; neither path exists.
-
-## From PyPI
-
-```bash
-pip install auto-announcements
-auto-announcements
-```
-
-Three packaging files declare three different names:
-
-| File | Name |
-|---|---|
-| `setup.py` | `auto-announcements` |
-| `pyproject.toml` | `Auto-Announcements` |
-| `setup.cfg` | `auto-annoucements` |
-
-The first two normalise to the same PyPI project. The third is a **different name** — missing an
-`n` — and the old README linked to it. Recorded in
-[`internal/known-issues.md`](./internal/known-issues.md).
+The installation adds the `auto-announcements` command. Keep your configuration,
+message body, and attachments outside the installed package. The source checkout
+includes `config.example.json` and `message.html`.
 
 ## Docker
 
-```bash
-docker pull ghcr.io/willtheorangeguy/auto-announcements:master
-docker run -i -t ghcr.io/willtheorangeguy/auto-announcements:master python -m send
-```
+Create a `data` directory containing `config.json`, `message.html`, and any
+attachments. Use paths relative to that configuration. Set an SMTP host reachable
+from the container: `localhost` means the container itself.
 
-**This will not send anything.** The image contains no mail server, and the code connects to
-`localhost`. It will prompt for both addresses and then raise `ConnectionRefusedError`.
-
-To make the container work you would need to point the SMTP host at a reachable relay, which
-means editing the code — there is no environment variable for it. Same known-issues file.
-
-## Verify
+Set `AUTO_ANNOUNCEMENTS_PASSWORD` in the host environment for authenticated SMTP.
+Set `TZ` to your timezone, for example `America/Edmonton`; Compose defaults to UTC.
 
 ```bash
-python -m send
+docker compose up --build -d
+docker compose logs -f
 ```
 
-If you get as far as the two prompts, the install is fine; anything after that is the relay.
-
-## Uninstall
+The service runs the scheduler and mounts `data` read-only.
 
 ```bash
-pip uninstall auto-announcements
+docker compose down
 ```
 
-Nothing is written to disk at any point — no config, no log, no queue.
+## Verify the installation
+
+From the source checkout:
+
+```bash
+auto-announcements --config config.example.json --dry-run
+```
+
+The output lists the subject, example recipient, zero attachments, and next
+scheduled time. No email is submitted.
+
+## Upgrading
+
+Update your checkout and reinstall:
+
+```bash
+git pull
+python -m pip install --upgrade .
+```
+
+## Uninstalling
+
+```bash
+python -m pip uninstall auto-announcements
+```
+
+Your configuration and announcement files remain in their original locations.
