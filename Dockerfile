@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM python:3.13-slim
+FROM python:3.14-slim
 RUN useradd --create-home --shell /bin/bash app_user
 WORKDIR /home/app_user
 ENV PYTHONUNBUFFERED=1
