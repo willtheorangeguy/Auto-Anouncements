@@ -29,6 +29,7 @@ jobs:
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v7
+      if: github.event_name != 'pull_request'
       with:
         name: coverage-report-${{ matrix.python-version }}
         path: coverage.xml
